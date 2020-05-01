@@ -2,10 +2,6 @@ package k.nabeel.androidimageslider;
 
 
 import android.content.Context;
-
-import androidx.viewpager.widget.PagerAdapter;
-import androidx.viewpager.widget.ViewPager;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,14 +9,16 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import androidx.viewpager.widget.PagerAdapter;
+
 
 public class MyCustomPagerAdapter extends PagerAdapter {
     Context context;
-    int images[];
+    int[] images;
     LayoutInflater layoutInflater;
 
 
-    public MyCustomPagerAdapter(Context context, int images[]) {
+    public MyCustomPagerAdapter(Context context, int[] images) {
         this.context = context;
         this.images = images;
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -33,14 +31,14 @@ public class MyCustomPagerAdapter extends PagerAdapter {
 
     @Override
     public boolean isViewFromObject(View view, Object object) {
-        return view == ((LinearLayout) object);
+        return view == object;
     }
 
     @Override
     public Object instantiateItem(ViewGroup container, final int position) {
         View itemView = layoutInflater.inflate(R.layout.item, container, false);
 
-        ImageView imageView = (ImageView) itemView.findViewById(R.id.imageView);
+        ImageView imageView = itemView.findViewById(R.id.imageView);
         imageView.setImageResource(images[position]);
 
         container.addView(itemView);
